@@ -78,8 +78,3 @@
 height: 31px; width: 31px; position: absolute; left: 0; top: 0; background: url('/images/num_button.png') no-repeat; text-align: center; font-size: 18px;
  color: #fff; text-shadow: 1px 1px 2px #034884; -moz-text-shadow: 1px 1px 2px #034884; -webkit-text-shadow: 1px 1px 2px #034884; line-height: 31px;
 }
-
-
-.ita{
-    font-style:italic;
-}

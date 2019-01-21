@@ -17,6 +17,7 @@
     <link href="Content/MyStyle.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="Content/bootstrap.min.css" />
     <link rel="stylesheet" href="Content/font-awesome.min.css" />
+    <link rel="stylesheet" href="Content/prof.css" />
     <script src="Scripts/jquery-3.3.1.min.js"></script>
     <script src="Scripts/jquery-3.3.1.slim.min.js"></script>
     <script src="Scripts/tether/tether.min.js"></script>
@@ -28,6 +29,7 @@
 <body style="background-image: url('Images/bg21.jpg'); background-size: cover">
     <form id="fg" runat="server">
         <%  var USERNAME = Session["USERNAME"]; %>
+        <% string USERTYPE = ""; if (Session["UserType"] != null) USERTYPE = Session["UserType"].ToString();%>
         <div class="text-center">
             <nav class="navbar fixed-top navbar-expand-lg navbar-dark align-content-center" style="background-color: #03465f;">
                 <a class="navbar-brand" style="margin-top: -13px; margin-bottom: -13px;" href="Default.aspx">
@@ -52,22 +54,28 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="Professional.aspx">Professional</a>
-                            <%--PROFESSIONALTRAINNING--%>
+                            <%--PROFESSIONALTRAINING--%>
                         </li>
-
                         <li class="nav-item">
                             <a class="nav-link" href="Galary.aspx">Gallery</a>
-                        </li>                     
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="Aboutus.aspx">About</a>
                         </li>
-                           <%
+                        <%
                             if (USERNAME != null)
                             { %>
                         <li class="nav-item">
                             <a class="nav-link" href="Services.aspx">Services</a>
                         </li>
+                        <%
+                            if (USERTYPE == "ADMIN")
+                            { %>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Administration.aspx">Administration</a>
+                        </li>
                         <%   }
+                            }
                         %>
                         <li class="nav-item">
                             <a class="nav-link" href="export pdf.aspx">pdf</a>

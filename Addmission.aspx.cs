@@ -15,7 +15,7 @@ public partial class Addmission : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         string query = "Select * from Subject";
-        ds = con.getdata(query);
+        ds = con.Getdata(query);
         CheckBoxList1.DataSource = ds;
         CheckBoxList1.DataTextField = "SUBNAME";
         CheckBoxList1.DataValueField = "SUBID";
@@ -23,7 +23,7 @@ public partial class Addmission : System.Web.UI.Page
         if (!this.IsPostBack)
         {
             string query1 = "Select * from Subject SB,SEMESTER SM WHERE SB.SUBID=SM.SUBID";
-            ds = con.getdata(query1);
+            ds = con.Getdata(query1);
             GridView1.DataSource = ds;
             GridView1.DataBind();
         }
@@ -43,7 +43,7 @@ public partial class Addmission : System.Web.UI.Page
             }
         }
         string query1 = "Select FEES from SUBWISEFEES  WHERE NOSUB="+TotalrOW;
-        ds = con.getdata(query1);
+        ds = con.Getdata(query1);
         string fees = ds.Tables[0].Rows[0][0].ToString();
         decimal totalFee =Convert.ToDecimal(fees) * TotalrOW;
         string totalFees = Convert.ToString(totalFee);

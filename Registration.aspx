@@ -8,7 +8,7 @@
     <div style="background-image: url(IMAGES/BG.PNG)">
         <div class="row main">
             <div class="main-login main-center-regis">
-                <h5>Sign up.</h5>
+                <h5>Sign up once and watch any of our free demos only on cwsc.</h5>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group text-left">
@@ -154,7 +154,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fa fa-map-pin" aria-hidden="true"></i></span>
                                     </div>
-                                    <asp:TextBox class="form-control" AutoCompleteType="Cellular" placeholder="Enter your Mobile No"
+                                    <asp:TextBox class="form-control" AutoCompleteType="Cellular" placeholder="Enter your Zipcode No"
                                         ID="Pin" runat="server" TextMode="Phone"></asp:TextBox>
                                 </div>
                                 <asp:RequiredFieldValidator ID="REQUIREDFIELDVALIDATOR8" runat="server" ForeColor="darkred"
@@ -196,7 +196,7 @@
                                         <span class="input-group-text"><i class="fas fa-id-badge" aria-hidden="true"></i></span>
                                     </div>
                                     <asp:TextBox class="form-control" placeholder="Enter your Aadhar" ID="Aadhar"
-                                      TextMode="Number" runat="server"></asp:TextBox>
+                                      TextMode="Phone" runat="server"></asp:TextBox>
                                 </div>
                                 <asp:RequiredFieldValidator ID="REQUIREDFIELDVALIDATOR10" runat="server" ForeColor="darkred"
                                     ControlToValidate="Aadhar" ErrorMessage="Required field cannot be left blank."
@@ -255,33 +255,56 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class='fas fa-atom' aria-hidden="true"></i></span>
                                     </div>
-                                    <asp:DropDownList class="form-control" ID="DropDownList1"  runat="server">
+                                    <asp:DropDownList class="form-control" ID="Religion"  runat="server">
                                         <asp:ListItem Value="Hinduism">Hinduism</asp:ListItem>
-                                        <asp:ListItem Value="Islam">Islam</asp:ListItem>
-                                        <asp:ListItem Value="Christianity">Christianity</asp:ListItem>
-                                        <asp:ListItem Value="Buddhism">Buddhism</asp:ListItem>
+                                        <asp:ListItem Value="Muslim">Muslim</asp:ListItem>
+                                        <asp:ListItem Value="Christian">Christian</asp:ListItem>
+                                        <asp:ListItem Value="Sikh">Sikh</asp:ListItem>
+                                        <asp:ListItem Value="Buddhist">Buddhist</asp:ListItem>
                                         <asp:ListItem Value="O">Others</asp:ListItem>
                                     </asp:DropDownList>
                                 </div>
                                 <asp:RequiredFieldValidator ID="REQUIREDFIELDVALIDATOR13" runat="server" ForeColor="darkred"
-                                    ControlToValidate="Gender" ErrorMessage="Required field cannot be left blank."
-                                    Display="Dynamic">
-                                </asp:RequiredFieldValidator>
-
+                                    ControlToValidate="Religion" ErrorMessage="Required field cannot be left blank."
+                                    Display="Dynamic"></asp:RequiredFieldValidator>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group  text-left">
+                            <label for="Contact" class=" text-left cols-sm-2 control-label">Education</label>
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class='fas fa-atom' aria-hidden="true"></i></span>
+                                    </div>
+                                    <asp:DropDownList class="form-control" ID="Education"  runat="server">
+                                        <asp:ListItem Value="Secondary">Secondary</asp:ListItem>
+                                        <asp:ListItem Value="Higher Secondary">Higher Secondary</asp:ListItem>
+                                        <asp:ListItem Value="Graduate">Graduate</asp:ListItem>
+                                        <asp:ListItem Value="PostGraduate">Post Graduate</asp:ListItem>
+                                        <asp:ListItem Value="O">Others</asp:ListItem>
+                                    </asp:DropDownList>
+                                </div>
+                                <asp:RequiredFieldValidator ID="REQUIREDFIELDVALIDATOR14" runat="server" ForeColor="darkred"
+                                    ControlToValidate="Education" ErrorMessage="Required field cannot be left blank."
+                                    Display="Dynamic"></asp:RequiredFieldValidator>
+
+                            </div>
+                        </div>
+                    </div>
+                    </div>
                 <div class="form-group ">
                     <asp:Button ID="BtnRegis" runat="server" Text="Registration" target="_blank"
                         type="button" CssClass="btn btn-primary btn-lg btn-block login-button"
                         OnClick="BtnRegis_Click" />
                 </div>
                 <p class="text-center">
-                    <a href="Login.aspx" style="color: white"><u>Allready Registred ? </u></a>
+                    <a href="Login.aspx" style="color: white"><u>Already Registered ? </u></a>
                 </p>
             </div>
-
         </div>
     </div>
 </asp:Content>

@@ -32,19 +32,20 @@ public partial class Services : System.Web.UI.Page
         {
             try
             {
-                switch (ext) // this switch code validate the files which allow to upload only PDF file   
-                {
-                    case ".pdf":
-                        type = "application/pdf";
-                        break;
-                }
-                if (type != String.Empty)
-                {
+                //switch (ext) // this switch code validate the files which allow to upload only PDF file   
+                //{
+                //    case ".pdf":
+                //        type = "application/pdf";
+                //        break;
+                //}
+                //if (type != String.Empty)
+                //{
                     Stream fs = FileUpload1.PostedFile.InputStream;
                     BinaryReader br = new BinaryReader(fs); //reads the binary files  
-                    Byte[] bytes = br.ReadBytes((Int32)fs.Length); //counting the file length into bytes  
-                    string query = "insert into PDFFiles (Name,type,data)" + " values (Name, @type, @Data)"; //insert query  
-                    con.executeNonQuery(query);
+                    Byte[] bytes = br.ReadBytes((Int32)fs.Length); //counting the file length into bytes 
+                    string inputstream = Convert.ToBase64String(bytes);
+                    string query = "insert into upload_files(autono,Name,slno,extension,data) values (2,'dd1',1 ,'ll','"+ inputstream + "')"; //insert query  
+                    con.ExecuteNonQuery(query);
                     //com = new SqlCommand(query, con);
                     //com.Parameters.Add("@Name", SqlDbType.VarChar).Value = filename1;
                     //com.Parameters.Add("@type", SqlDbType.VarChar).Value = type;
@@ -52,12 +53,12 @@ public partial class Services : System.Web.UI.Page
                     //com.ExecuteNonQuery();
                     Label2.ForeColor = System.Drawing.Color.Green;
                     Label2.Text = "File Uploaded Successfully";
-                }
-                else
-                {
-                    Label2.ForeColor = System.Drawing.Color.Red;
-                    Label2.Text = "Select Only PDF Files "; // if file is other than speified extension   
-                }
+              //  }
+                //else
+                //{
+                //    Label2.ForeColor = System.Drawing.Color.Red;
+                //    Label2.Text = "Select Only PDF Files "; // if file is other than speified extension   
+                //}
             }
             catch (Exception ex)
             {
@@ -67,24 +68,26 @@ public partial class Services : System.Web.UI.Page
     }
     protected void Button2_Click(object sender, EventArgs e)
     {
-       string query = "Select *from PDFFiles";
-        DataSet ds = con.getdata(query);
+       string query = "Select * from upload_files";
+        DataSet ds = con.Getdata(query);
         GridView1.DataSource = ds;
         GridView1.DataBind();
     }
     protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
     {
-        string qu = "select Name,type,data from PDFFiles where id=@id";
-        SqlDataReader dr = con.getreader(qu);//;.ExecuteReader();
+        string qu = "select * from upload_files where slno=1";
+        SqlDataReader dr = con.Getreader(qu);//;.ExecuteReader();
         if (dr.Read())
         {
             Response.Clear();
             Response.Buffer = true;
-            Response.ContentType = dr["type"].ToString();
-            Response.AddHeader("content-disposition", "attachment;filename=" + dr["Name"].ToString()); // to open file prompt Box open or Save file  
+            Response.ContentType = "application/pdf";// dr["type"].ToString();
+            Response.AddHeader("content-disposition", "attachment;filename=" + dr["Name"].ToString()+".pdf"); // to open file prompt Box open or Save file  
             Response.Charset = "";
-            Response.Cache.SetCacheability(HttpCacheability.NoCache);
-            Response.BinaryWrite((byte[])dr["data"]);
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);            
+            string typ = dr["data"].ToString();
+            byte[] b = System.Text.Encoding.ASCII.GetBytes(typ);
+             Response.BinaryWrite(b);
             Response.End();
         }
     }

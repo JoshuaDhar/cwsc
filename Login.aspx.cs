@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 public partial class Login : System.Web.UI.Page
 {
     DBConnection con = new DBConnection();
-
+    MethodControl mc = new MethodControl();
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -39,7 +39,7 @@ public partial class Login : System.Web.UI.Page
             string query = "Select * from USER_DETAILS where USERID='" + UserId.Text + "' AND PASSWORD='" + Password.Text + "'";
             SqlDataReader dr;
             // dr = con.getreader("select * from employee_registration where emp_id='" + TextBox1.Text + "' and emp_password='" + TextBox2.Text + "'");
-            dr = con.getreader(query);
+            dr = con.Getreader(query);
             //ClientScript.RegisterStartupScript(this.GetType(), "Login Error", string.Format("alert('{0}');", LoginErrorMessage.ToString().Replace("'", "\\'")), true);
             //  ClientScript.RegisterStartupScript(this.GetType(), "Login Error", "alert('Error Message');", true);
 
@@ -51,9 +51,11 @@ public partial class Login : System.Web.UI.Page
                     string dyc = dr["PASSWORD"].ToString();
                     if (dyc == Password.Text)
                     {
-                        Session["UserId"] = dr.GetValue(0).ToString();
+                        Session["UserId"] = dr.GetValue(1).ToString();
                         Session["UserName"] = dr["NAME"].ToString();
-                        Response.Redirect("Aboutus.aspx");
+                        Session["UserType"] = dr["USERTYPE"].ToString();
+                        mc.Update_ACTIVITIES("LOGIN");
+                        Response.Redirect("Default.aspx");
                     }
                     else
                     {

@@ -14,11 +14,10 @@ namespace CWSC
     public class DBConnection
     {
         public System.Data.SqlClient.SqlDataReader dr;
-        public System.Data.DataSet ds;
-        //System.Data.SqlClient.SqlConnection con1 = new System.Data.SqlClient.SqlConnection("server=.;uid=sa;pwd=mithun;database=CWSC");
+        //public System.Data.DataSet ds;
         System.Data.SqlClient.SqlConnection con = new System.Data.SqlClient.SqlConnection("Server=JOSHUA;Database=CWSC;Integrated Security=yes;");
         
-        public void executeNonQuery(string query)
+        public void ExecuteNonQuery(string query)
         {
             con.Close();
             if (con.State == ConnectionState.Closed)
@@ -29,7 +28,7 @@ namespace CWSC
             cmd.ExecuteNonQuery();
             con.Close();
         }
-        public DataSet getdata(string query)
+        public DataSet Getdata(string query)
         {
             con.Close();
             if (con.State == ConnectionState.Closed)
@@ -42,7 +41,7 @@ namespace CWSC
             da.Fill(ds);
             return ds;
         }
-        public System.Data.SqlClient.SqlDataReader getreader(string query)
+        public System.Data.SqlClient.SqlDataReader Getreader(string query)
         {
             con.Close();
 
